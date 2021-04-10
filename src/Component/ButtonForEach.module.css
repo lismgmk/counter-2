@@ -1,0 +1,21 @@
+
+.buttonInc{
+  margin: 10px;
+  height: 20px;
+  background-color: dimgray;
+  border: 3px solid red;
+  border-radius: 5px;
+  width: 55px;
+  height: 26px;
+  color: blue;
+  text-align: center;
+}
+
+
+
+.buttonIncdisabled{
+  background-color: rgba(117, 190, 218, 0.5);
+  color: rgba(0,0,255, 0.1);
+  border: 3px solid rgba(255,0,0, 0.5);
+}
+

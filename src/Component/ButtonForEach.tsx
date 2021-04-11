@@ -4,7 +4,7 @@ import s from './ButtonForEach.module.css';
 export type ButtonIncType = {
     title: string
     onClickButton: () => void
-    disableButton?: boolean
+    disableButton: boolean
 }
 
 export function ButtonForEach({title, onClickButton, disableButton} : ButtonIncType) {

@@ -6,18 +6,25 @@ import {DisplayCounter2} from "./DisplayCounter2";
 
 export type SettingCounterType = {
     onClickButton: () => void
-    disableButton: boolean
+    disableButtonSet: boolean
+
     valueInput1: number
-    setValueInput1?: any
     valueInput2: number
-    setValueInput2?: any
-    setValueInputNext?: any
-    setValueInputPrev?: any
+
+    setValueInputNext1: () => void
+    setValueInputPrev1: () => void
+    setValueInputNext2: () => void
+    setValueInputPrev2: () => void
+
+
+
+    onBlurInput: ()=> void
+    onFocusInut: ()=> void
 }
 
 
 
-export function SettingCounter (props : SettingCounterType & SelectType) {
+export function SettingCounter (props : SettingCounterType ) {
 
 
 
@@ -28,15 +35,16 @@ export function SettingCounter (props : SettingCounterType & SelectType) {
                   valueInput={props.valueInput1}
                   onBlurInput={props.onBlurInput}
                   onFocusInut={props.onFocusInut}
-                  setValueInputNext={props.setValueInput1}
-                  setValueInputPrev={props.setValueInput1}
+                  setValueInputNext={props.setValueInputNext1}
+                  setValueInputPrev={props.setValueInputPrev1}
+
               />
               <Select
                   valueInput={props.valueInput2}
                   onBlurInput={props.onBlurInput}
                   onFocusInut={props.onFocusInut}
-                  setValueInputNext={props.setValueInput2}
-                  setValueInputPrev={props.setValueInput2}
+                  setValueInputNext={props.setValueInputNext2}
+                  setValueInputPrev={props.setValueInputPrev2}
               />
           </div>
 
@@ -45,7 +53,7 @@ export function SettingCounter (props : SettingCounterType & SelectType) {
               <ButtonForEach
                   title = {'Set'}
                   onClickButton = {props.onClickButton}
-                  disableButton = {props.disableButton}
+                  disableButton = {props.disableButtonSet}
               />
 
           </div>

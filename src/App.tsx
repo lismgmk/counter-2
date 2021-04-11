@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useReducer, useState} from 'react';
 import s from './App.module.css';
 import {DisplayCounter2} from "./Component/DisplayCounter2";
 import {SettingCounter} from "./Component/SettingCounter";
+
 
 
 
@@ -9,9 +10,12 @@ function App() {
 //counter
     const  [valueInput1, setValueInput1] = useState(5)
     const  [valueInput2, setValueInput2] = useState(0)
+
+    //
+
     const [value, setValue] = useState<number>(0);
-    const maxVal = valueInput1;
-    const minVal = valueInput2;
+    let maxVal = valueInput1;
+    let minVal = valueInput2;
     const countNum = () => {
         if( value  <  maxVal )
         setValue(value+1)
@@ -28,24 +32,34 @@ function App() {
 
     const  onBlurInput = () => {}
     const  onFocusInut = () => {}
-    const  setValueInput11 =()=>{setValueInput1(valueInput1+1)}
-    const  setValueInput22 =()=> {setValueInput2(valueInput2-1)}
-    const  onClickButton = () => {}
-    const  disableButton = true
+    const  onClickButton = () => {
+        debugger
+        minVal = valueInput2
+        maxVal = valueInput1
+        disableButtonSet = true
+        reset()
 
-  return (
+    }
+    let  disableButtonSet = valueInput1 < valueInput2 || valueInput1 < 0 || valueInput2 < 0 || valueInput1 === valueInput2
+
+
+
+    return (
       <div className={s.mainContainer}>
           <SettingCounter
               valueInput1={valueInput1}
               valueInput2={valueInput2}
-              setValueInput1 = {setValueInput11}
-              setValueInput2 = {setValueInput22}
+              setValueInputNext1={() => setValueInput1(valueInput1 + 1)}
+              setValueInputPrev1={() => setValueInput1(valueInput1 - 1)}
+              setValueInputNext2={() => setValueInput2(valueInput2 + 1)}
+              setValueInputPrev2={() => setValueInput2(valueInput2 - 1)}
+
 
               onBlurInput={onBlurInput}
               onFocusInut={onFocusInut}
 
               onClickButton = {onClickButton}
-              disableButton = {disableButton}
+              disableButtonSet = {disableButtonSet}
 
           />
 

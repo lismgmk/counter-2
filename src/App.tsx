@@ -28,8 +28,8 @@ function App() {
 
     const  onBlurInput = () => {}
     const  onFocusInut = () => {}
-    const  onClickButtonNext = () => {setValueInput1(valueInput1+1)}
-    const  onClickButtonPrev = () => {setValueInput1(valueInput1-1)}
+    const  setValueInput11 =()=>{setValueInput1(valueInput1+1)}
+    const  setValueInput22 =()=> {setValueInput2(valueInput2-1)}
     const  onClickButton = () => {}
     const  disableButton = true
 
@@ -38,10 +38,12 @@ function App() {
           <SettingCounter
               valueInput1={valueInput1}
               valueInput2={valueInput2}
+              setValueInput1 = {setValueInput11}
+              setValueInput2 = {setValueInput22}
+
               onBlurInput={onBlurInput}
               onFocusInut={onFocusInut}
-              onClickButtonNext={onClickButtonNext}
-              onClickButtonPrev={onClickButtonPrev}
+
               onClickButton = {onClickButton}
               disableButton = {disableButton}
 
@@ -55,6 +57,7 @@ function App() {
               disableButtonReset = {disableButtonReset}
               setError = {setError}
               value = {value}
+
           />
 
 

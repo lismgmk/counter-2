@@ -1,6 +1,7 @@
 import React from 'react';
 import s from '../App.module.css';
 import {ButtonForEach} from "./ButtonForEach";
+import {SelectType} from "./Select";
 
 export type DisplayCounterType = {
     countNum: () => void
@@ -11,7 +12,7 @@ export type DisplayCounterType = {
     value: number
 }
 
-export function DisplayCounter2 ({countNum, reset, disableButtonInc,disableButtonReset, setError, value} : DisplayCounterType) {
+export function DisplayCounter2 ({ countNum, reset, disableButtonInc,disableButtonReset, setError, value} : DisplayCounterType ) {
 
 
 

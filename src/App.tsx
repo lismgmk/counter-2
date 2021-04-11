@@ -4,11 +4,14 @@ import {DisplayCounter2} from "./Component/DisplayCounter2";
 import {SettingCounter} from "./Component/SettingCounter";
 
 
-function App() {
 
-    const [value, setValue] = useState(0);
-    const maxVal = 5;
-    const minVal = 0;
+function App() {
+//counter
+    const  [valueInput1, setValueInput1] = useState(5)
+    const  [valueInput2, setValueInput2] = useState(0)
+    const [value, setValue] = useState<number>(0);
+    const maxVal = valueInput1;
+    const minVal = valueInput2;
     const countNum = () => {
         if( value  <  maxVal )
         setValue(value+1)
@@ -20,11 +23,30 @@ function App() {
     const disableButtonReset = value === minVal;
     const setError = value == maxVal ? s.error : '';
 
+//setting
 
-    const settingButton = ()=>{}
+
+    const  onBlurInput = () => {}
+    const  onFocusInut = () => {}
+    const  onClickButtonNext = () => {setValueInput1(valueInput1+1)}
+    const  onClickButtonPrev = () => {setValueInput1(valueInput1-1)}
+    const  onClickButton = () => {}
+    const  disableButton = true
 
   return (
       <div className={s.mainContainer}>
+          <SettingCounter
+              valueInput1={valueInput1}
+              valueInput2={valueInput2}
+              onBlurInput={onBlurInput}
+              onFocusInut={onFocusInut}
+              onClickButtonNext={onClickButtonNext}
+              onClickButtonPrev={onClickButtonPrev}
+              onClickButton = {onClickButton}
+              disableButton = {disableButton}
+
+          />
+
 
           <DisplayCounter2
               countNum = {countNum}
@@ -33,14 +55,8 @@ function App() {
               disableButtonReset = {disableButtonReset}
               setError = {setError}
               value = {value}
-          /><SettingCounter
-              countNum = {countNum}
-              reset = {reset}
-              disableButtonInc = {disableButtonInc}
-              disableButtonReset = {disableButtonReset}
-              setError = {setError}
-              value = {value}
           />
+
 
       </div>
   );

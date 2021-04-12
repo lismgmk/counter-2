@@ -5,15 +5,16 @@ export type ButtonIncType = {
     title: string
     onClickButton: () => void
     disableButton: boolean
+    error: boolean
 }
 
-export function ButtonForEach({title, onClickButton, disableButton} : ButtonIncType) {
+export function ButtonForEach({title, onClickButton, disableButton, error} : ButtonIncType) {
 
 
 
   return (
       <div
-          className={`${s.buttonInc} ${disableButton ? s.buttonIncdisabled : null}`}
+          className={`${s.buttonInc} ${disableButton && error ? s.buttonIncdisabled : null}`}
           onClick={onClickButton}
       >
           {title}

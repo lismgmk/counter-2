@@ -10,9 +10,10 @@ export type DisplayCounterType = {
     disableButtonReset: boolean
     setError: string
     value: number
+    error: boolean
 }
 
-export function DisplayCounter2 ({ countNum, reset, disableButtonInc,disableButtonReset, setError, value} : DisplayCounterType ) {
+export function DisplayCounter2 ({ countNum, reset, disableButtonInc,disableButtonReset, setError, value, error} : DisplayCounterType ) {
 
 
 
@@ -29,12 +30,14 @@ export function DisplayCounter2 ({ countNum, reset, disableButtonInc,disableButt
                   title = {'Inc'}
                   onClickButton = {countNum}
                   disableButton = {disableButtonInc}
+                  error={error}
               />
 
               <ButtonForEach
                   title = {'Reset'}
                   onClickButton = {reset}
                   disableButton = {disableButtonReset}
+                  error={error}
               />
 
           </div>

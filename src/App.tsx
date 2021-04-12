@@ -10,11 +10,14 @@ function App() {
 //counter
     const  [valueInput1, setValueInput1] = useState(5)
     const  [valueInput2, setValueInput2] = useState(0)
+    const  [error, setError1] = useState(false)
+
+
 
     //
-
+debugger
     const [value, setValue] = useState<number>(0);
-    let maxVal = valueInput1;
+    let maxVal = valueInput1
     let minVal = valueInput2;
     const countNum = () => {
         if( value  <  maxVal )
@@ -29,19 +32,17 @@ function App() {
 
 //setting
 
+    let  disableButtonSet = valueInput1 < valueInput2 || valueInput1 < 0 || valueInput2 < 0 || valueInput1 === valueInput2
 
-    const  onBlurInput = () => {}
-    const  onFocusInut = () => {}
+
     const  onClickButton = () => {
-        debugger
+
         minVal = valueInput2
         maxVal = valueInput1
-        disableButtonSet = true
+        setError1(true)
         reset()
 
     }
-    let  disableButtonSet = valueInput1 < valueInput2 || valueInput1 < 0 || valueInput2 < 0 || valueInput1 === valueInput2
-
 
 
     return (
@@ -49,14 +50,11 @@ function App() {
           <SettingCounter
               valueInput1={valueInput1}
               valueInput2={valueInput2}
-              setValueInputNext1={() => setValueInput1(valueInput1 + 1)}
-              setValueInputPrev1={() => setValueInput1(valueInput1 - 1)}
-              setValueInputNext2={() => setValueInput2(valueInput2 + 1)}
-              setValueInputPrev2={() => setValueInput2(valueInput2 - 1)}
+              setValueInputNext1={setValueInput1}
+              setValueInputNext2={setValueInput2}
+              error = {error}
 
 
-              onBlurInput={onBlurInput}
-              onFocusInut={onFocusInut}
 
               onClickButton = {onClickButton}
               disableButtonSet = {disableButtonSet}
@@ -71,7 +69,7 @@ function App() {
               disableButtonReset = {disableButtonReset}
               setError = {setError}
               value = {value}
-
+                error = {error}
           />
 
 

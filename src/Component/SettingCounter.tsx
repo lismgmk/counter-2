@@ -11,15 +11,13 @@ export type SettingCounterType = {
     valueInput1: number
     valueInput2: number
 
-    setValueInputNext1: () => void
-    setValueInputPrev1: () => void
-    setValueInputNext2: () => void
-    setValueInputPrev2: () => void
+    setValueInputNext1: (value:any) => void
+    setValueInputNext2: (value:any) => void
+    error: boolean
 
 
 
-    onBlurInput: ()=> void
-    onFocusInut: ()=> void
+
 }
 
 
@@ -33,18 +31,16 @@ export function SettingCounter (props : SettingCounterType ) {
           <div>
               <Select
                   valueInput={props.valueInput1}
-                  onBlurInput={props.onBlurInput}
-                  onFocusInut={props.onFocusInut}
+
                   setValueInputNext={props.setValueInputNext1}
-                  setValueInputPrev={props.setValueInputPrev1}
+
 
               />
               <Select
                   valueInput={props.valueInput2}
-                  onBlurInput={props.onBlurInput}
-                  onFocusInut={props.onFocusInut}
+
                   setValueInputNext={props.setValueInputNext2}
-                  setValueInputPrev={props.setValueInputPrev2}
+
               />
           </div>
 
@@ -54,6 +50,7 @@ export function SettingCounter (props : SettingCounterType ) {
                   title = {'Set'}
                   onClickButton = {props.onClickButton}
                   disableButton = {props.disableButtonSet}
+                  error = {props.error}
               />
 
           </div>

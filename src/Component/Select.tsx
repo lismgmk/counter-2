@@ -3,9 +3,9 @@ import s from './Select.module.css';
 
 export type SelectType = {
     valueInput: number
+    addError: ()=>void
 
-
-
+    errorSetting: boolean
 
     setValueInputNext:(value:any)=>void
 
@@ -15,7 +15,7 @@ export type SelectType = {
 
 export function Select(props: SelectType) {
 
-    const [error, setError] = useState(false)
+
 
 debugger
     return (
@@ -23,9 +23,12 @@ debugger
         <div>
 
             <input
-                className={`${s.inputStyle} ${error ? s.error : ''}`}
+                className={`${s.inputStyle} ${props.errorSetting ? s.error : ''}`}
                 type="number"
-                onChange={(e)=>props.setValueInputNext(+e.currentTarget.value)}
+                onChange={(e)=>{
+                    props.setValueInputNext(+e.currentTarget.value)
+                    props.addError()
+                }}
             />
 
 

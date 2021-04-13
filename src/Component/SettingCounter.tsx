@@ -6,16 +6,16 @@ import {DisplayCounter2} from "./DisplayCounter2";
 
 export type SettingCounterType = {
     onClickButton: () => void
-    disableButtonSet: boolean
+    // disableButtonSet: boolean
 
     valueInput1: number
     valueInput2: number
 
     setValueInputNext1: (value:any) => void
     setValueInputNext2: (value:any) => void
-    error: boolean
-
-
+    errorSetting: boolean
+    addError: ()=>void
+    disable: boolean
 
 
 }
@@ -31,16 +31,16 @@ export function SettingCounter (props : SettingCounterType ) {
           <div>
               <Select
                   valueInput={props.valueInput1}
-
+                  addError = {props.addError}
                   setValueInputNext={props.setValueInputNext1}
-
+                  errorSetting = {props.errorSetting}
 
               />
               <Select
                   valueInput={props.valueInput2}
-
+                  addError = {props.addError}
                   setValueInputNext={props.setValueInputNext2}
-
+                  errorSetting = {props.errorSetting}
               />
           </div>
 
@@ -49,8 +49,8 @@ export function SettingCounter (props : SettingCounterType ) {
               <ButtonForEach
                   title = {'Set'}
                   onClickButton = {props.onClickButton}
-                  disableButton = {props.disableButtonSet}
-                  error = {props.error}
+                  disable = {props.disable}
+                  errorSetting = {props.errorSetting}
               />
 
           </div>

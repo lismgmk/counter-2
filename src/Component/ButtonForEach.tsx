@@ -4,17 +4,17 @@ import s from './ButtonForEach.module.css';
 export type ButtonIncType = {
     title: string
     onClickButton: () => void
-    disableButton: boolean
-    error: boolean
+    errorSetting: boolean
+    disable: boolean
 }
 
-export function ButtonForEach({title, onClickButton, disableButton, error} : ButtonIncType) {
+export function ButtonForEach({disable, title, onClickButton} : ButtonIncType) {
 
 
 
   return (
       <div
-          className={`${s.buttonInc} ${disableButton && error ? s.buttonIncdisabled : null}`}
+          className={`${s.buttonInc} ${ disable ? s.disable : null}`}
           onClick={onClickButton}
       >
           {title}

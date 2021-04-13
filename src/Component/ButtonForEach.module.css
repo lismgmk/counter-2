@@ -13,7 +13,7 @@
 
 
 
-.buttonIncdisabled{
+.disable{
   background-color: rgba(117, 190, 218, 0.5);
   color: rgba(0,0,255, 0.1);
   border: 3px solid rgba(255,0,0, 0.5);

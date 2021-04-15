@@ -1,22 +1,23 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState, MouseEvent} from 'react';
 import s from './App.module.css';
+import style from './Component/ButtonForEach.module.css'
 import {DisplayCounter2} from "./Component/DisplayCounter2";
 import {SettingCounter} from "./Component/SettingCounter";
 
 
 function App() {
 
-    const [valueInput1, setValueInput1] = useState(5)
+    const [value, setValue] = useState<number>(0)
+    const [valueInput1, setValueInput1] = useState(0)
     const [valueInput2, setValueInput2] = useState(0)
     const [errorSetting, setErrorSetting] = useState(false)
     const [errorCounter, setErrorCounter] = useState(true)
-    const [disable, setDisable] = useState(false)
+    const [disableInc, setDisableInc] = useState(false)
 
+    let maxVal = valueInput1
+    let minVal = valueInput2
 
-    let disableButtonSet = valueInput1 < valueInput2 || valueInput1 < 0 || valueInput2 < 0 || valueInput1 === valueInput2
-
-    const [value, setValue] = useState<number>(0)
-
+    let disableButtonSet = valueInput1 < valueInput2 && valueInput1 < 0 && valueInput2 < 0 && valueInput1 === valueInput2
 
     const addError = () => {
         if (disableButtonSet) {
@@ -26,63 +27,76 @@ function App() {
         }
     }
 
-
-    let maxVal = valueInput1
-    let minVal = valueInput2
-    const countNum = () => {
+    const onClickButtonInc = () => {
         if (value < maxVal ) {
              setValue(value + 1)
         }
+
     }
 
-    const reset = () => {
+    const onClickButtonReset = (e:MouseEvent<HTMLDivElement>) => {
         setValue(minVal)
-        setErrorSetting(false)
+        buttonResetDisable(e)
+        e.currentTarget.className = `${style.buttonInc} ${ disableInc ? style.disable : null}`
+        // setErrorSetting(false)
     };
 
-    // const disableButtonInc = value >= maxVal;
-    // const disableButtonReset = value === minVal;
-    // const setError = value == maxVal ? s.error : '';
-
-
-
-    const onClickButton = () => {
+    const onClickButtonSet = () => {
         minVal = valueInput2
         maxVal = valueInput1
-        reset()
-        setErrorCounter(false)
-        setErrorSetting(true)
+        setValue(minVal)
+        setDisableInc(true)
+        // onClickButtonReset()
+        // setErrorCounter(false)
+        // setErrorSetting(true)
     }
 
-    // const buttonSetDisable = () => {
-    //
-    // }
-    // const buttonIncDisable = () => {
-    //
-    // }
-    // const buttonResetDisable = () => {
-    //
-    // }
+    const buttonResetDisable = (e: MouseEvent<HTMLDivElement>) => {
+
+        setDisableInc(true)
+        console.log(e.currentTarget)
+    }
+    const buttonIncDisable = () => {
+
+    }
+    const buttonSetDisable = () => {
+
+
+    }
+
+
+    const checkInput = () => {
+        if(value < maxVal){
+            setDisableInc(true)
+        }
+        else{
+            setDisableInc(false)
+        }
+    }
 
     return (
         <div className={s.mainContainer}>
+            {/*{checkInput()}*/}
             <SettingCounter
+
                 valueInput1={valueInput1}
                 valueInput2={valueInput2}
                 setValueInputNext1={setValueInput1}
                 setValueInputNext2={setValueInput2}
                 errorSetting={errorSetting}
-                onClickButton={onClickButton}
+                onClickButtonSet={onClickButtonSet}
                 addError = {addError}
-                disable={disable}
+                dis={buttonSetDisable}
+                disable={disableInc}
             />
             <DisplayCounter2
-                countNum={countNum}
-                reset={reset}
+
+                onClickButtonInc={onClickButtonInc}
+                onClickButtonReset={onClickButtonReset}
                 value={value}
                 errorCounter={errorCounter}
                 errorSetting={errorSetting}
-                disable={disable}
+                disable={false}
             />
         </div>
     )

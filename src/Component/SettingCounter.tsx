@@ -5,9 +5,9 @@ import {Select, SelectType} from "./Select";
 import {DisplayCounter2} from "./DisplayCounter2";
 
 export type SettingCounterType = {
-    onClickButton: () => void
+    onClickButtonSet: () => void
     // disableButtonSet: boolean
-
+dis: () => void
     valueInput1: number
     valueInput2: number
 
@@ -48,9 +48,10 @@ export function SettingCounter (props : SettingCounterType ) {
 
               <ButtonForEach
                   title = {'Set'}
-                  onClickButton = {props.onClickButton}
+                  onClickButton = {props.onClickButtonSet}
                   disable = {props.disable}
                   errorSetting = {props.errorSetting}
+
               />
 
           </div>

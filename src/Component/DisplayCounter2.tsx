@@ -4,8 +4,8 @@ import {ButtonForEach} from "./ButtonForEach";
 
 
 export type DisplayCounterType = {
-    countNum: () => void
-    reset: () => void
+    onClickButtonInc: () => void
+    onClickButtonReset: (e: any) => void
     // disableButtonInc: boolean
     // disableButtonReset: boolean
     // setError: string
@@ -15,7 +15,7 @@ export type DisplayCounterType = {
     disable: boolean
 }
 
-export function DisplayCounter2 ({disable, errorSetting, countNum, reset, value, errorCounter} : DisplayCounterType ) {
+export function DisplayCounter2 ({disable, errorSetting, onClickButtonInc, onClickButtonReset, value, errorCounter} : DisplayCounterType ) {
 
 
 
@@ -29,14 +29,14 @@ export function DisplayCounter2 ({disable, errorSetting, countNum, reset, value,
 
               <ButtonForEach
                   title = {'Inc'}
-                  onClickButton = {countNum}
+                  onClickButton = {onClickButtonInc}
                   errorSetting={errorCounter}
                   disable={disable}
               />
 
               <ButtonForEach
                   title = {'Reset'}
-                  onClickButton = {reset}
+                  onClickButton = {onClickButtonReset}
                   errorSetting={errorCounter}
                   disable={disable}
               />

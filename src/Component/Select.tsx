@@ -1,28 +1,28 @@
-import React, {useState, useEffect, ChangeEvent} from 'react';
-import s from './Select.module.css';
+import React, {ChangeEvent, ChangeEventHandler} from 'react';
+import s from './Select.module.css'
 
 export type SelectType = {
     valueInput: number
-    addError: ()=>void
     errorSetting: boolean
-    setValueInputNext:(value:any)=>void
+    onChangeSelect: (value: number)=>void
+    classNameSelect: string
 }
 
 
 export function Select(props: SelectType) {
 
-
+    const changeValueHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        props.onChangeSelect(event.currentTarget.valueAsNumber)
+    }
 
     return (
         <div>
             <input
-                className={`${s.inputStyle} ${props.errorSetting ? s.error : ''}`}
+
+                className={` ${props.classNameSelect} ${s.inputStyle} ${props.errorSetting ? s.error : ''}`}
                 type="number"
                 value={props.valueInput}
-                onChange={(e)=>{
-                    props.setValueInputNext(+e.currentTarget.value)
-                    props.addError()
-                }}
+                onChange={changeValueHandler}
             />
         </div>
     );

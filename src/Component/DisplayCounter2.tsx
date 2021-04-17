@@ -1,50 +1,57 @@
 import React from 'react';
 import s from '../App.module.css';
 import {ButtonForEach} from "./ButtonForEach";
+import {log} from "util";
 
 
 export type DisplayCounterType = {
     onClickButtonInc: () => void
-    onClickButtonReset: (e: any) => void
+    onClickButtonReset: () => void
     // disableButtonInc: boolean
     // disableButtonReset: boolean
     // setError: string
-    value: number
-    errorCounter: boolean
-    errorSetting: boolean
-    disable: boolean
+    valueFunc: ()=> number
+    errorCounter: string
+    errorNumber: boolean
+    disableReset: boolean
+    disableInc: boolean
 }
 
-export function DisplayCounter2 ({disable, errorSetting, onClickButtonInc, onClickButtonReset, value, errorCounter} : DisplayCounterType ) {
+export function DisplayCounter2 (props : DisplayCounterType ) {
 
-
-
+    const checkErrorCounter = () => {
+        switch (props.errorCounter) {
+            case 'good':
+                return <div className={`${s.displayCounter} ${props.errorNumber ? s.error : ''}`}>{props.valueFunc()}</div>
+            case 'incorrectValue':
+                return <div className={`${s.displayCounter}`}>Incorrect Value</div>
+            case 'pressSet':
+                return <div className={`${s.displayCounter}`}>pres button Set</div>
+            default:
+                return console.log('error')
+        }
+    }
 
   return (
       <div className={s.container}>
-          { !errorSetting && <div className = {`${s.displayCounter}`}>{value}</div>}
-          { errorSetting && <div className = {`${s.displayCounter}`}>ошибка</div>}
 
+          {checkErrorCounter()}
           <div className={s.buttonsBlock}>
 
               <ButtonForEach
                   title = {'Inc'}
-                  onClickButton = {onClickButtonInc}
-                  errorSetting={errorCounter}
-                  disable={disable}
+                  onClickButton = {props.onClickButtonInc}
+                  disable={props.disableInc}
               />
 
               <ButtonForEach
                   title = {'Reset'}
-                  onClickButton = {onClickButtonReset}
-                  errorSetting={errorCounter}
-                  disable={disable}
+                  onClickButton = {props.onClickButtonReset}
+                  disable={props.disableReset}
               />
 
           </div>
       </div>
 
-  );
+  )
 }
-
-

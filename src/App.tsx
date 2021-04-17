@@ -1,102 +1,176 @@
-import React, {ChangeEvent, useState, MouseEvent} from 'react';
+import React, { useEffect, useState} from 'react';
 import s from './App.module.css';
-import style from './Component/ButtonForEach.module.css'
+
 import {DisplayCounter2} from "./Component/DisplayCounter2";
 import {SettingCounter} from "./Component/SettingCounter";
 
 
+
+type errorCounterType = 'good' | 'incorrectValue' | 'pressSet'
+
 function App() {
 
-    const [value, setValue] = useState<number>(0)
-    const [valueInput1, setValueInput1] = useState(0)
-    const [valueInput2, setValueInput2] = useState(0)
-    const [errorSetting, setErrorSetting] = useState(false)
-    const [errorCounter, setErrorCounter] = useState(true)
+    const classNameSelectMax = 'max'
+    const classNameSelectMin = 'min'
+
+    const [valueInput2, setValueInput2] = useState<number>(1)
+    const [value, setValue] = useState<number>(1)
+    const [valueInput1, setValueInput1] = useState<number>(3)
+
+
+    useEffect(()=>{
+debugger
+        let valueInputMin = localStorage.getItem('valueInput2')
+        let valueInputMax = localStorage.getItem('valueInput1')
+
+        if(valueInputMin
+            && valueInputMax){
+            let correctValMin = JSON.parse(valueInputMin)
+            let correctValMax = JSON.parse(valueInputMax)
+            setValueInput1(correctValMax)
+            setValueInput2(correctValMin)
+        }
+    }, [])
+
+    useEffect(()=>{
+        localStorage.setItem('valueInput1', JSON.stringify(valueInput1))
+    }, [valueInput1])
+
+
+    useEffect(()=>{
+        localStorage.setItem('valueInput2', JSON.stringify(valueInput2))
+    }, [valueInput2])
+
+
+
+
+
+
+    const [errorSetting1, setErrorSetting1] = useState(false)
+    const [errorSetting2, setErrorSetting2] = useState(false)
+
+    const [errorNumber, setErrorNumber] = useState(false)
+
+    const [errorCounter, setErrorCounter] = useState<errorCounterType>('good')
+
+    const [disableSet, setDisableSet] = useState(true)
+    const [disableReset, setDisableReset] = useState(false)
     const [disableInc, setDisableInc] = useState(false)
 
     let maxVal = valueInput1
-    let minVal = valueInput2
-
-    let disableButtonSet = valueInput1 < valueInput2 && valueInput1 < 0 && valueInput2 < 0 && valueInput1 === valueInput2
-
-    const addError = () => {
-        if (disableButtonSet) {
-            setErrorSetting(true)
-        } else{
-            setErrorSetting(false)
-        }
-    }
 
     const onClickButtonInc = () => {
-        if (value < maxVal ) {
-             setValue(value + 1)
+        debugger
+        if (value < maxVal) {
+            setValue(value + 1)
         }
-
     }
 
-    const onClickButtonReset = (e:MouseEvent<HTMLDivElement>) => {
-        setValue(minVal)
-        buttonResetDisable(e)
-        e.currentTarget.className = `${style.buttonInc} ${ disableInc ? style.disable : null}`
-        // setErrorSetting(false)
+    const valueFunc = () => {
+        if (value < maxVal) {
+            setErrorNumber(false)
+            return value
+        } else if (value >= maxVal) {
+            setDisableInc(true)
+            setDisableReset(false)
+            setErrorNumber(true)
+            return value
+        } else{
+            return value
+        }
+    }
+
+    const onClickButtonReset = () => {
+        setValue(valueInput2)
+        setDisableReset(true)
+        setDisableInc(false)
+        setErrorNumber(false)
     };
 
     const onClickButtonSet = () => {
-        minVal = valueInput2
         maxVal = valueInput1
-        setValue(minVal)
-        setDisableInc(true)
-        // onClickButtonReset()
-        // setErrorCounter(false)
-        // setErrorSetting(true)
+        setValue(valueInput2)
+        setDisableSet(true)
+        setErrorCounter('good')
     }
 
-    const buttonResetDisable = (e: MouseEvent<HTMLDivElement>) => {
-
-        setDisableInc(true)
-        console.log(e.currentTarget)
-    }
-    const buttonIncDisable = () => {
-
-    }
-    const buttonSetDisable = () => {
-
-
-    }
-
-
-    const checkInput = () => {
-        if(value < maxVal){
-            setDisableInc(true)
+    const onChangeSelect1 = (value: number)=>{
+        setValueInput1(value)
+        setDisableSet(false)
+        if (value < valueInput2 || value < 0) {
+            setErrorCounter('incorrectValue')
+            setDisableSet(true)
+            setErrorSetting1(true)
+        }
+        else if(value == valueInput2){
+            setErrorCounter('incorrectValue')
+            setErrorSetting1(true)
+            setErrorSetting2(true)
+            setDisableSet(true)
+        }
+        else if(value > valueInput2){
+            setErrorCounter('pressSet')
+            setErrorSetting1(false)
+            setErrorSetting2(false)
+            setDisableSet(false)
         }
         else{
-            setDisableInc(false)
+            setErrorCounter('good')
+            setErrorSetting1(false)
+            setDisableSet(false)
+        }
+    }
+
+    const onChangeSelect2 = (value: number)=>{
+        setValueInput2(value)
+        setDisableSet(false)
+        if (value > valueInput1 || value < 0) {
+            setErrorCounter('incorrectValue')
+            setDisableSet(true)
+            setErrorSetting2(true)
+        }
+        else if(value == valueInput1){
+            setErrorCounter('incorrectValue')
+            setErrorSetting1(true)
+            setErrorSetting2(true)
+            setDisableSet(true)
+        }
+        else if(value < valueInput1){
+            setErrorCounter('pressSet')
+            setDisableSet(false)
+            setErrorSetting2(false)
+            setErrorSetting1(false)
+        }
+        else{
+            setErrorCounter('good')
+            setDisableSet(false)
+            setErrorSetting2(false)
         }
     }
 
     return (
         <div className={s.mainContainer}>
-            {/*{checkInput()}*/}
-            <SettingCounter
 
+            <SettingCounter
+                classNameSelectMax={classNameSelectMax}
+                classNameSelectMin={classNameSelectMin}
+                onChangeSelect1={onChangeSelect1}
+                onChangeSelect2={onChangeSelect2}
                 valueInput1={valueInput1}
                 valueInput2={valueInput2}
-                setValueInputNext1={setValueInput1}
-                setValueInputNext2={setValueInput2}
-                errorSetting={errorSetting}
+                errorSetting1={errorSetting1}
+                errorSetting2={errorSetting2}
                 onClickButtonSet={onClickButtonSet}
-                addError = {addError}
-                dis={buttonSetDisable}
-                disable={disableInc}
+                disableSet={disableSet}
             />
             <DisplayCounter2
-
                 onClickButtonInc={onClickButtonInc}
                 onClickButtonReset={onClickButtonReset}
-                value={value}
+                valueFunc={valueFunc}
                 errorCounter={errorCounter}
-                errorSetting={errorSetting}
-                disable={false}
+                disableReset={disableReset}
+                disableInc={disableInc}
+                errorNumber={errorNumber}
             />
         </div>
     )

@@ -4,21 +4,21 @@ import s from './ButtonForEach.module.css';
 export type ButtonIncType = {
     title: string
     onClickButton: (e : any) => void
-    errorSetting: boolean
+
     disable: boolean
 
 }
 
-export function ButtonForEach({disable, title, onClickButton} : ButtonIncType) {
+export function ButtonForEach(props : ButtonIncType) {
 
 
 
   return (
       <div
-          className={`${s.buttonInc} ${ disable ? s.disable : null}`}
-          onClick={onClickButton }
+          className={`${s.buttonInc} ${ props.disable ? s.disable : null}`}
+          onClick={props.onClickButton }
       >
-          {title}
+          {props.title}
       </div>
   );
 }

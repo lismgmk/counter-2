@@ -1,22 +1,20 @@
 import React from 'react';
 import s from '../App.module.css';
 import {ButtonForEach} from "./ButtonForEach";
-import {Select, SelectType} from "./Select";
-import {DisplayCounter2} from "./DisplayCounter2";
+import {Select} from "./Select";
+
 
 export type SettingCounterType = {
     onClickButtonSet: () => void
-    // disableButtonSet: boolean
-dis: () => void
     valueInput1: number
     valueInput2: number
-
-    setValueInputNext1: (value:any) => void
-    setValueInputNext2: (value:any) => void
-    errorSetting: boolean
-    addError: ()=>void
-    disable: boolean
-
+    errorSetting1: boolean
+    errorSetting2: boolean
+    disableSet: boolean
+    onChangeSelect1: (value: number) => void
+    onChangeSelect2: (value: number) => void
+    classNameSelectMax: string
+    classNameSelectMin: string
 
 }
 
@@ -30,17 +28,16 @@ export function SettingCounter (props : SettingCounterType ) {
       <div className={s.container}>
           <div>
               <Select
+                  onChangeSelect = {props.onChangeSelect1}
                   valueInput={props.valueInput1}
-                  addError = {props.addError}
-                  setValueInputNext={props.setValueInputNext1}
-                  errorSetting = {props.errorSetting}
-
+                  errorSetting = {props.errorSetting1}
+                  classNameSelect = {props.classNameSelectMax}
               />
               <Select
+                  onChangeSelect = {props.onChangeSelect2}
                   valueInput={props.valueInput2}
-                  addError = {props.addError}
-                  setValueInputNext={props.setValueInputNext2}
-                  errorSetting = {props.errorSetting}
+                  errorSetting = {props.errorSetting2}
+                  classNameSelect = {props.classNameSelectMin}
               />
           </div>
 
@@ -49,9 +46,7 @@ export function SettingCounter (props : SettingCounterType ) {
               <ButtonForEach
                   title = {'Set'}
                   onClickButton = {props.onClickButtonSet}
-                  disable = {props.disable}
-                  errorSetting = {props.errorSetting}
-
+                  disable = {props.disableSet}
               />
 
           </div>

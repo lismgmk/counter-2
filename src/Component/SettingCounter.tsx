@@ -26,18 +26,18 @@ export function SettingCounter (props : SettingCounterType ) {
 
   return (
       <div className={s.container}>
-          <div>
+          <div className={`${s.buttonsBlock} ${s.buttonsBlockSelect}`}>
               <Select
-                  onChangeSelect = {props.onChangeSelect1}
+                  onChangeSelect={props.onChangeSelect1}
                   valueInput={props.valueInput1}
-                  errorSetting = {props.errorSetting1}
-                  classNameSelect = {props.classNameSelectMax}
+                  errorSetting={props.errorSetting1}
+                  classNameSelect={props.classNameSelectMax}
               />
               <Select
-                  onChangeSelect = {props.onChangeSelect2}
+                  onChangeSelect={props.onChangeSelect2}
                   valueInput={props.valueInput2}
-                  errorSetting = {props.errorSetting2}
-                  classNameSelect = {props.classNameSelectMin}
+                  errorSetting={props.errorSetting2}
+                  classNameSelect={props.classNameSelectMin}
               />
           </div>
 

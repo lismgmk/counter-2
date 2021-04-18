@@ -24,9 +24,9 @@ export function DisplayCounter2 (props : DisplayCounterType ) {
             case 'good':
                 return <div className={`${s.displayCounter} ${props.errorNumber ? s.error : ''}`}>{props.valueFunc()}</div>
             case 'incorrectValue':
-                return <div className={`${s.displayCounter}`}>Incorrect Value</div>
+                return <div className={`${s.displayCounterText}`}>Incorrect Value</div>
             case 'pressSet':
-                return <div className={`${s.displayCounter}`}>pres button Set</div>
+                return <div className={`${s.displayCounterText}`}>pres button Set</div>
             default:
                 return console.log('error')
         }

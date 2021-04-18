@@ -19,7 +19,7 @@ function App() {
 
 
     useEffect(()=>{
-debugger
+
         let valueInputMin = localStorage.getItem('valueInput2')
         let valueInputMax = localStorage.getItem('valueInput1')
 

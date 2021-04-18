@@ -52,11 +52,21 @@ body{
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  width: 210px;
+  height: 126px;
 }
 
 .displayCounterText{
-  width: 150px;
   font-weight: bold;
   color: red;
   font-size: large;
+  width: 210px;
+  height: 126px;
+  background-color: darkgray;
+  border-radius: 5px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 6px solid yellow;
 }

@@ -2,22 +2,31 @@ import React from 'react';
 import s from '../App.module.css';
 import {ButtonForEach} from "./ButtonForEach";
 import {log} from "util";
+import {useDispatch, useSelector} from "react-redux";
+import {IGlobalState} from "../Redux/state";
+import {Dispatch} from "redux";
+import {ActionCreatersType} from "../Redux/actions";
 
 
-export type DisplayCounterType = {
-    onClickButtonInc: () => void
-    onClickButtonReset: () => void
-    // disableButtonInc: boolean
-    // disableButtonReset: boolean
-    // setError: string
-    valueFunc: ()=> number
-    errorCounter: string
-    errorNumber: boolean
-    disableReset: boolean
-    disableInc: boolean
-}
+// export type DisplayCounterType = {
+//     onClickButtonInc: () => void
+//     onClickButtonReset: () => void
+//     // disableButtonInc: boolean
+//     // disableButtonReset: boolean
+//     // setError: string
+//     valueFunc: ()=> number
+//     errorCounter: string
+//     errorNumber: boolean
+//     disableReset: boolean
+//     disableInc: boolean
+// }
 
-export function DisplayCounter2 (props : DisplayCounterType ) {
+export function DisplayCounter2 (
+    // props : DisplayCounterType
+) {
+
+    const state = useSelector((state: IGlobalState) => state.counter)
+    const dispatch = useDispatch<Dispatch<ActionCreatersType>>();
 
     const checkErrorCounter = () => {
         switch (props.errorCounter) {

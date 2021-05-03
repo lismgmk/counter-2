@@ -8,21 +8,21 @@ import {Dispatch} from "redux";
 import {ActionCreatersType} from "../Redux/actions";
 
 
-// export type DisplayCounterType = {
-//     onClickButtonInc: () => void
-//     onClickButtonReset: () => void
-//     // disableButtonInc: boolean
-//     // disableButtonReset: boolean
-//     // setError: string
-//     valueFunc: ()=> number
-//     errorCounter: string
-//     errorNumber: boolean
-//     disableReset: boolean
-//     disableInc: boolean
-// }
+export type DisplayCounterType = {
+    onClickButtonInc: () => void
+    onClickButtonReset: () => void
+    // disableButtonInc: boolean
+    // disableButtonReset: boolean
+    // setError: string
+    valueFunc: ()=> number
+    errorCounter: string
+    errorNumber: boolean
+    disableReset: boolean
+    disableInc: boolean
+}
 
 export function DisplayCounter2 (
-    // props : DisplayCounterType
+    props : DisplayCounterType
 ) {
 
     const state = useSelector((state: IGlobalState) => state.counter)

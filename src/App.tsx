@@ -3,12 +3,20 @@ import s from './App.module.css';
 
 import {DisplayCounter2} from "./Component/DisplayCounter2";
 import {SettingCounter} from "./Component/SettingCounter";
+import {useDispatch, useSelector} from "react-redux";
+import {IGlobalState} from "./Redux/state";
+import {Dispatch} from "redux";
+import {ActionCreatersType} from "./Redux/actions";
 
 
 
 type errorCounterType = 'good' | 'incorrectValue' | 'pressSet'
 
 function App() {
+
+    const state = useSelector((state: IGlobalState) => state.counter)
+    const dispatch = useDispatch<Dispatch<ActionCreatersType>>();
+
 
     const classNameSelectMax = 'max'
     const classNameSelectMin = 'min'

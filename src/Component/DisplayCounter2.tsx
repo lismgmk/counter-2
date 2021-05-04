@@ -25,8 +25,7 @@ export function DisplayCounter2 (
     props : DisplayCounterType
 ) {
 
-    const state = useSelector((state: IGlobalState) => state.counter)
-    const dispatch = useDispatch<Dispatch<ActionCreatersType>>();
+
 
     const checkErrorCounter = () => {
         switch (props.errorCounter) {

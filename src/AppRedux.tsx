@@ -6,48 +6,57 @@ import {SettingCounter} from "./Component/SettingCounter";
 import {useDispatch, useSelector} from "react-redux";
 import {IGlobalState} from "./Redux/state";
 import {Dispatch} from "redux";
+import {ChangeDisplayValueAC} from "./Redux/displayValueReduser";
+import {ChangeInputMaxValueAC} from "./Redux/inputMaxReduser";
+import {ChangeInputStartValueAC} from "./Redux/inputStartReduser";
 
 
 
 
 type errorCounterType = 'good' | 'incorrectValue' | 'pressSet'
 
-function App() {
+function AppRedux() {
 
-    // const state = useSelector<>((state: IGlobalState) => state.counter.)
-    // const dispatch = useDispatch<Dispatch<ActionCreatersType>>();
+    const value = useSelector((state: IGlobalState) => state.displayValue.displayValue);
+
+    const valueInput1 = useSelector((state: IGlobalState) => state.inputMax.inputValue);
+    const valueInput2 = useSelector((state: IGlobalState) => state.inputStart.inputValue);
+
+
+
+    const dispatch = useDispatch();
 
 
     const classNameSelectMax = 'max'
     const classNameSelectMin = 'min'
 
-    const [valueInput2, setValueInput2] = useState<number>(1)
-    const [value, setValue] = useState<number>(1)
-    const [valueInput1, setValueInput1] = useState<number>(3)
+    // const [valueInput2, setValueInput2] = useState<number>(1)
+    // const [value, setValue] = useState<number>(1)
+    // const [valueInput1, setValueInput1] = useState<number>(3)
 
 
-    useEffect(()=>{
-
-        let valueInputMin = localStorage.getItem('valueInput2')
-        let valueInputMax = localStorage.getItem('valueInput1')
-
-        if(valueInputMin
-            && valueInputMax){
-            let correctValMin = JSON.parse(valueInputMin)
-            let correctValMax = JSON.parse(valueInputMax)
-            setValueInput1(correctValMax)
-            setValueInput2(correctValMin)
-        }
-    }, [])
-
-    useEffect(()=>{
-        localStorage.setItem('valueInput1', JSON.stringify(valueInput1))
-    }, [valueInput1])
-
-
-    useEffect(()=>{
-        localStorage.setItem('valueInput2', JSON.stringify(valueInput2))
-    }, [valueInput2])
+    // useEffect(()=>{
+    //
+    //     let valueInputMin = localStorage.getItem('valueInput2')
+    //     let valueInputMax = localStorage.getItem('valueInput1')
+    //
+    //     if(valueInputMin
+    //         && valueInputMax){
+    //         let correctValMin = JSON.parse(valueInputMin)
+    //         let correctValMax = JSON.parse(valueInputMax)
+    //         setValueInput1(correctValMax)
+    //         setValueInput2(correctValMin)
+    //     }
+    // }, [])
+    //
+    // useEffect(()=>{
+    //     localStorage.setItem('valueInput1', JSON.stringify(valueInput1))
+    // }, [valueInput1])
+    //
+    //
+    // useEffect(()=>{
+    //     localStorage.setItem('valueInput2', JSON.stringify(valueInput2))
+    // }, [valueInput2])
 
 
 
@@ -59,7 +68,7 @@ function App() {
 
     const [errorNumber, setErrorNumber] = useState(false)
 
-    const [errorCounter, setErrorCounter] = useState<errorCounterType>('good')
+    // const [errorCounter, setErrorCounter] = useState<errorCounterType>('good')
 
     const [disableSet, setDisableSet] = useState(true)
     const [disableReset, setDisableReset] = useState(false)
@@ -68,9 +77,8 @@ function App() {
     let maxVal = valueInput1
 
     const onClickButtonInc = () => {
-        debugger
-        if (value < maxVal) {
-            setValue(value + 1)
+        if (typeof(value) == 'number' && value < maxVal) {
+            dispatch(ChangeDisplayValueAC(value+1))
         }
     }
 
@@ -89,7 +97,8 @@ function App() {
     }
 
     const onClickButtonReset = () => {
-        setValue(valueInput2)
+        dispatch(ChangeDisplayValueAC(valueInput2))
+        // setValue(valueInput2)
         setDisableReset(true)
         setDisableInc(false)
         setErrorNumber(false)
@@ -97,60 +106,67 @@ function App() {
 
     const onClickButtonSet = () => {
         maxVal = valueInput1
-        setValue(valueInput2)
+        dispatch(ChangeDisplayValueAC(valueInput2))
         setDisableSet(true)
-        setErrorCounter('good')
+        dispatch(ChangeDisplayValueAC('good'))
+        // setErrorCounter('good')
     }
 
     const onChangeSelect1 = (value: number)=>{
-        setValueInput1(value)
+        // setValueInput1(value)
+        dispatch(ChangeInputMaxValueAC(value))
         setDisableSet(false)
         if (value < valueInput2 || value < 0) {
-            setErrorCounter('incorrectValue')
+            // setErrorCounter('incorrectValue')
+            dispatch(ChangeDisplayValueAC('incorrectValue'))
             setDisableSet(true)
             setErrorSetting1(true)
         }
         else if(value == valueInput2){
-            setErrorCounter('incorrectValue')
+            // setErrorCounter('incorrectValue')
+            dispatch(ChangeDisplayValueAC('incorrectValue'))
             setErrorSetting1(true)
             setErrorSetting2(true)
             setDisableSet(true)
         }
         else if(value > valueInput2){
-            setErrorCounter('pressSet')
+            // setErrorCounter('pressSet')
+            dispatch(ChangeDisplayValueAC('pressSet'))
             setErrorSetting1(false)
             setErrorSetting2(false)
             setDisableSet(false)
         }
         else{
-            setErrorCounter('good')
+            // setErrorCounter('good')
+            dispatch(ChangeDisplayValueAC('good'))
             setErrorSetting1(false)
             setDisableSet(false)
         }
     }
 
     const onChangeSelect2 = (value: number)=>{
-        setValueInput2(value)
+        // setValueInput2(value)
+        dispatch(ChangeInputStartValueAC(value))
         setDisableSet(false)
         if (value > valueInput1 || value < 0) {
-            setErrorCounter('incorrectValue')
+            dispatch(ChangeDisplayValueAC('incorrectValue'))
             setDisableSet(true)
             setErrorSetting2(true)
         }
         else if(value == valueInput1){
-            setErrorCounter('incorrectValue')
+            dispatch(ChangeDisplayValueAC('incorrectValue'))
             setErrorSetting1(true)
             setErrorSetting2(true)
             setDisableSet(true)
         }
         else if(value < valueInput1){
-            setErrorCounter('pressSet')
+            dispatch(ChangeDisplayValueAC('pressSet'))
             setDisableSet(false)
             setErrorSetting2(false)
             setErrorSetting1(false)
         }
         else{
-            setErrorCounter('good')
+            dispatch(ChangeDisplayValueAC('good'))
             setDisableSet(false)
             setErrorSetting2(false)
         }
@@ -175,7 +191,7 @@ function App() {
                 onClickButtonInc={onClickButtonInc}
                 onClickButtonReset={onClickButtonReset}
                 valueFunc={valueFunc}
-                errorCounter={errorCounter}
+                errorCounter={ChangeDisplayValueAC('good')}
                 disableReset={disableReset}
                 disableInc={disableInc}
                 errorNumber={errorNumber}
@@ -184,4 +200,4 @@ function App() {
     )
 }
 
-export default App;
+export default AppRedux;

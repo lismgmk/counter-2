@@ -5,7 +5,7 @@ import {log} from "util";
 import {useDispatch, useSelector} from "react-redux";
 import {IGlobalState} from "../Redux/state";
 import {Dispatch} from "redux";
-import {ActionCreatersType} from "../Redux/actions";
+
 
 
 export type DisplayCounterType = {
@@ -14,8 +14,8 @@ export type DisplayCounterType = {
     // disableButtonInc: boolean
     // disableButtonReset: boolean
     // setError: string
-    valueFunc: ()=> number
-    errorCounter: string
+    valueFunc: any
+    errorCounter: any
     errorNumber: boolean
     disableReset: boolean
     disableInc: boolean

@@ -21,16 +21,25 @@ export type DisplayCounterType = {
     disableInc: boolean
 }
 
-export function DisplayCounter2 (
-    props : DisplayCounterType
-) {
+const ewq = () => {
+    if (min <  max) {
+        return str!
+    }
 
+    ret str2
+}
 
+<div>{false ? qwe(Num) : ewq()}</div>
 
+export function DisplayCounter2 (props : DisplayCounterType) {
     const checkErrorCounter = () => {
         switch (props.errorCounter) {
             case 'good':
-                return <div className={`${s.displayCounter} ${props.errorNumber ? s.error : ''}`}>{props.valueFunc()}</div>
+                return <div
+                    className={`${s.displayCounter} ${props.errorNumber ? s.error : ''}`}
+                >
+                    {props.valueFunc()}
+                </div>
             case 'incorrectValue':
                 return <div className={`${s.displayCounterText}`}>Incorrect Value</div>
             case 'pressSet':

@@ -61,7 +61,6 @@ export const  valueInput2AC = (valueInput2: number) => {
         type: ACTIONS_TYPE.CHANGE_VALUE_INPUT2,
         valueInput2
     })
-
 }
 export const valueInput1AC = (valueInput1: number) => {
     return({

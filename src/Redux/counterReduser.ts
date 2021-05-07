@@ -18,31 +18,31 @@ export type initialStateType = {
 }
 
 const initialState : initialStateType= {
-        valueInput2: 1,
-        value: 1,
-        valueInput1: 3,
-        errorSetting1: false,
-        errorSetting2: false,
-        errorNumber: false,
-        errorCounter: 'good',
+        value: 1, // displa count
+        valueInput1: 3, // max
+        valueInput2: 1, // min
+        isInputErrorStyle errorSetting1: false, // ???
+        errorSetting2: false, // ???
+        is errorNumber: false, // +
+        errorCounter: 'good', // +
         disableSet: true,
         disableReset: false,
         disableInc: false
 }
 
-export const counterReduser = (state = initialState, action : ActionCreatersType ) => {
+export const counterReduser = (state = initialState, action : ActionCreatersType ): initialStateType => {
     switch (action.type){
 
         case ACTIONS_TYPE.CHANGE_VALUE_INPUT2:
             return {
                 ...state,
-                displayValue: action.valueInput2
+                valueInput2: action.valueInput2
             }
 
         case ACTIONS_TYPE.CHANGE_VALUE_INPUT1:
             return {
                 ...state,
-                displayValue: action.valueInput1
+                valueInput1: action.valueInput1
             }
 
         case ACTIONS_TYPE.CHANGE_VALUE:

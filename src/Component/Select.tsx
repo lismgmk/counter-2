@@ -19,8 +19,12 @@ export function Select(props: SelectType) {
         <div className={s.inputContainer}>
             <div className={s.titleName}>{props.classNameSelect}</div>
             <input
-
-                className={` ${props.classNameSelect} ${s.inputStyle} ${props.errorSetting ? s.error : ''}`}
+                className={
+                    `${props.classNameSelect} ${s.inputStyle} 
+                    ${props.errorSetting
+                        ? s.error 
+                        : ''}`
+                }
                 type="number"
                 value={props.valueInput}
                 onChange={changeValueHandler}

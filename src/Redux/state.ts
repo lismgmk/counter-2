@@ -1,8 +1,14 @@
 import {combineReducers, createStore} from "redux";
-import {counterReduser} from "./counterReduser";
+import {inputStartReduser} from "./inputStartReduser";
+import {inputMaxReduser} from "./inputMaxReduser";
+import {displayValueReduser} from "./displayValueReduser";
+import {disabledButtonReduser} from "./disabledButtonReduser";
 
 const redusers = combineReducers({
-    counter: counterReduser
+    inputStart: inputStartReduser,
+    inputMax: inputMaxReduser,
+    displayValue: displayValueReduser,
+    disabledButton: disabledButtonReduser
 })
 
 export const store = createStore(redusers);
